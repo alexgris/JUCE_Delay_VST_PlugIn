@@ -2,7 +2,7 @@
   ==============================================================================
 
     RotaryKnob.h
-    Created: 9 Jun 2025 11:57:01am
+    Created: 16 Jun 2025 11:34:45pm
     Author:  Alex
 
   ==============================================================================
@@ -20,11 +20,12 @@ class RotaryKnob  : public juce::Component
 public:
     RotaryKnob(const juce::String& text, juce::AudioProcessorValueTreeState& apvts, const juce::ParameterID& parameterID);
     ~RotaryKnob() override;
-
+    
     juce::Slider slider;
     juce::Label label;
     juce::AudioProcessorValueTreeState::SliderAttachment attachment;
 
+    
     void resized() override;
 
 private:
