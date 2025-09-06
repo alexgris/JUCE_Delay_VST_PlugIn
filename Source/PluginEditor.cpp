@@ -47,9 +47,10 @@ DelayAudioProcessorEditor::~DelayAudioProcessorEditor()
 void DelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(Colors::background);
 
-    g.fillAll(juce::Colours::darkgrey);
+    //g.fillAll(juce::Colours::darkgrey);
     //g.setColour (juce::Colours::white);
     //g.setFont (juce::FontOptions (40.0f));
     //g.drawFittedText ("My First Plug-In!", getLocalBounds(), juce::Justification::centred, 1);
@@ -75,6 +76,8 @@ void DelayAudioProcessorEditor::resized()
     delayTimeKnob.setTopLeftPosition(20, 20);
     mixKnob.setTopLeftPosition(20, 20);
     gainKnob.setTopLeftPosition(mixKnob.getX(), mixKnob.getBottom() + 10);
+    gainKnob.slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::green);
+
 
     /*delayTimeKnob.setTopLeftPosition(20, 10);
     mixKnob.setTopLeftPosition(delayTimeKnob.getRight()+20, 10);
