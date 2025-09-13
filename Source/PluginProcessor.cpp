@@ -5,9 +5,10 @@
 
   ==============================================================================
 */
-
+#include "ProtectYourEars.h"
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+
 
 //==============================================================================
 DelayAudioProcessor::DelayAudioProcessor() :
@@ -95,7 +96,10 @@ void DelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    
+    feedbackL = 0.0f;
+    feedbackR = 0.0f;
+
+
     params.prepareToPlay(sampleRate);
     params.reset();
     
@@ -204,30 +208,37 @@ void DelayAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, [[maybe
             float dryL = channelDataL[sample];
             float dryR = channelDataR[sample];
 
-            delayLine.pushSample(0, dryL);
-            delayLine.pushSample(1, dryR);
+            delayLine.pushSample(0, dryL + feedbackL);
+            delayLine.pushSample(1, dryR + feedbackR);
 
             float wetL = delayLine.popSample(0);
             float wetR = delayLine.popSample(1);
 
-            channelDataL[sample] = (dryL+wetL)*params.gain; 
-            channelDataR[sample] = (dryR + wetR) * params.gain;
 
-           /* channelDataL[sample] = params.delayTime / 5000.0f;
-            channelDataR[sample] = params.delayTime / 5000.0f;*/
+            feedbackL = wetL * params.feedback;
+            feedbackR = wetR * params.feedback;
 
             float mixL = dryL + wetL * params.mix;
             float mixR = dryR + wetR * params.mix;
 
+
+            //channelDataL[sample] = (dryL+wetL)*params.gain; 
+            //channelDataR[sample] = (dryR + wetR) * params.gain;
+
+           /* channelDataL[sample] = params.delayTime / 5000.0f;
+            channelDataR[sample] = params.delayTime / 5000.0f;*/
+            
             channelDataL[sample] = mixL * params.gain;
             channelDataR[sample] = mixR * params.gain;
-
 
         
         }
     
     //}
 
+#if JUCE_DEBUG
+        protectYourEars(buffer);
+#endif
 
 }
 

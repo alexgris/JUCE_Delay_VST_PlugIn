@@ -25,12 +25,14 @@ DelayAudioProcessorEditor::DelayAudioProcessorEditor (DelayAudioProcessor& p)
     feedbackGroup.setText("Feedback");
     feedbackGroup.setTextLabelPosition(juce::Justification::horizontallyCentred);
     addAndMakeVisible(feedbackGroup);
+    feedbackGroup.addAndMakeVisible(feedbackKnob);
 
     outputGroup.setText("Output");
     outputGroup.setTextLabelPosition(juce::Justification::horizontallyCentred);
     outputGroup.addAndMakeVisible(gainKnob);
     outputGroup.addAndMakeVisible(mixKnob);
     addAndMakeVisible(outputGroup);
+    setLookAndFeel(&mainLF);
 
 
    /* addAndMakeVisible(gainKnob);
@@ -41,6 +43,9 @@ DelayAudioProcessorEditor::DelayAudioProcessorEditor (DelayAudioProcessor& p)
 
 DelayAudioProcessorEditor::~DelayAudioProcessorEditor()
 {
+
+    setLookAndFeel(nullptr);
+
 }
 
 //==============================================================================
@@ -48,12 +53,28 @@ void DelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    g.fillAll(Colors::background);
+    //g.fillAll(Colors::background);
+
+    auto noise = juce::ImageCache::getFromMemory(BinaryData::Noise_png, BinaryData::Noise_pngSize);
+    auto fillType = juce::FillType(noise, juce::AffineTransform::scale(0.5f));
+    g.setFillType(fillType);
+    g.fillRect(getLocalBounds());
 
     //g.fillAll(juce::Colours::darkgrey);
     //g.setColour (juce::Colours::white);
     //g.setFont (juce::FontOptions (40.0f));
     //g.drawFittedText ("My First Plug-In!", getLocalBounds(), juce::Justification::centred, 1);
+
+    auto rect = getLocalBounds().withHeight(40);
+    g.setColour(Colors::header);
+    g.fillRect(rect);
+
+    auto image = juce::ImageCache::getFromMemory(BinaryData::Logo_png, BinaryData::Logo_pngSize);
+
+    int destWidth = image.getWidth() / 2;
+    int destHeight = image.getHeight() / 2;
+
+    g.drawImage(image, getWidth() / 2 - destWidth / 2, 0, destWidth, destHeight, 0, 0, image.getWidth(), image.getHeight());
 }
 
 void DelayAudioProcessorEditor::resized()
@@ -63,8 +84,8 @@ void DelayAudioProcessorEditor::resized()
 
     auto bounds = getLocalBounds();
 
-    int y = 10;
-    int height = bounds.getHeight() - 20;
+    int y = 50;
+    int height = bounds.getHeight() - 60;
 
     //Position the groups
     delayGroup.setBounds(10, y, 110, height);
@@ -77,7 +98,7 @@ void DelayAudioProcessorEditor::resized()
     mixKnob.setTopLeftPosition(20, 20);
     gainKnob.setTopLeftPosition(mixKnob.getX(), mixKnob.getBottom() + 10);
     gainKnob.slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::green);
-
+    feedbackKnob.setTopLeftPosition(20, 20);
 
     /*delayTimeKnob.setTopLeftPosition(20, 10);
     mixKnob.setTopLeftPosition(delayTimeKnob.getRight()+20, 10);

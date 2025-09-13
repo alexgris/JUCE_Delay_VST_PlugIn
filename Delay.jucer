@@ -4,6 +4,11 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCode="Dlay"
               cppLanguageStandard="20">
   <MAINGROUP id="L19gXE" name="Delay">
+    <GROUP id="{6741B5DB-6310-3522-4672-CE76424C3675}" name="Assets">
+      <FILE id="WC0Zvj" name="Lato-Medium.ttf" compile="0" resource="1" file="../BeginnerBookAudioProgramming/Resources/Lato-Medium.ttf"/>
+      <FILE id="PCtCzg" name="Logo.png" compile="0" resource="1" file="../BeginnerBookAudioProgramming/Resources/Logo.png"/>
+      <FILE id="xH7E2g" name="Noise.png" compile="0" resource="1" file="../BeginnerBookAudioProgramming/Resources/Noise.png"/>
+    </GROUP>
     <GROUP id="{BCAE5ECC-8B5D-B9D6-9F26-3D9E614E50F8}" name="Source">
       <FILE id="un12K7" name="Parameters.cpp" compile="1" resource="0" file="Source/Parameters.cpp"/>
       <FILE id="WMTfH6" name="Parameters.h" compile="0" resource="0" file="Source/Parameters.h"/>
@@ -18,6 +23,8 @@
       <FILE id="lX6eLn" name="RotaryKnob.h" compile="0" resource="0" file="Source/RotaryKnob.h"/>
       <FILE id="jVGQdy" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
       <FILE id="kfnCFp" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
+      <FILE id="wyG8UA" name="ProtectYourEars.h" compile="0" resource="0"
+            file="../BeginnerBookAudioProgramming/Resources/ProtectYourEars.h"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>
