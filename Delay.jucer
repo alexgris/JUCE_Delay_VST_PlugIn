@@ -10,6 +10,7 @@
       <FILE id="xH7E2g" name="Noise.png" compile="0" resource="1" file="../BeginnerBookAudioProgramming/Resources/Noise.png"/>
     </GROUP>
     <GROUP id="{BCAE5ECC-8B5D-B9D6-9F26-3D9E614E50F8}" name="Source">
+      <FILE id="L9773m" name="DSP.h" compile="0" resource="0" file="Source/DSP.h"/>
       <FILE id="un12K7" name="Parameters.cpp" compile="1" resource="0" file="Source/Parameters.cpp"/>
       <FILE id="WMTfH6" name="Parameters.h" compile="0" resource="0" file="Source/Parameters.h"/>
       <FILE id="imWxMu" name="PluginEditor.cpp" compile="1" resource="0"
