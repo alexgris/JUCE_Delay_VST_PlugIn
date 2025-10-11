@@ -41,6 +41,8 @@ private:
     MainLookAndFeel mainLF;
     RotaryKnob feedbackKnob{ "Feedback", audioProcessor.apvts, feedbackParamID, true
     };
+    RotaryKnob stereoKnob{ "Stereo", audioProcessor.apvts, stereoParamID, true
+    };
 
     
 
