@@ -43,6 +43,8 @@ private:
     };
     RotaryKnob stereoKnob{ "Stereo", audioProcessor.apvts, stereoParamID, true
     };
+    RotaryKnob lowCutKnob{ "Low Cut", audioProcessor.apvts, lowCutParamID };
+    RotaryKnob highCutKnob{ "High Cut", audioProcessor.apvts, highCutParamID };
 
     
 
