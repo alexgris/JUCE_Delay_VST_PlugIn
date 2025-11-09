@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "Parameters.h"
+#include "Tempo.h"
 
 
 
@@ -60,7 +61,9 @@ public:
 
     juce::AudioProcessorValueTreeState apvts{
     *this, nullptr, "Parameters", Parameters::createParameterLayout()
-    };  
+    }; 
+
+    Parameters params;
 
     
 
@@ -79,7 +82,8 @@ private:
     juce::dsp::StateVariableTPTFilter<float> highCutFilter;
     
 
-    Parameters params;
+    //Parameters params;
+    Tempo tempo;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayAudioProcessor)

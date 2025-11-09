@@ -10,6 +10,7 @@
 #include "PluginEditor.h"
 
 
+
 //==============================================================================
 DelayAudioProcessor::DelayAudioProcessor() :
 
@@ -125,6 +126,8 @@ void DelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     highCutFilter.prepare(spec);
     highCutFilter.reset();
 
+    tempo.reset();
+
     
 
     DBG(maxDelayInSamples);
@@ -206,6 +209,12 @@ void DelayAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, [[maybe
 
     //1
     params.update();
+    tempo.update(getPlayHead());
+
+    float syncedTime = float(tempo.getMillisecondsForNoteLength(params.delayNote));
+    if (syncedTime > Parameters::maxDelayTime) {
+        syncedTime = Parameters::maxDelayTime;
+    }
 
     //2
     //float* channelDataL = buffer.getWritePointer(0);
@@ -241,7 +250,11 @@ void DelayAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, [[maybe
 
         params.smoothen();
 
-        float delayInSamples = params.delayTime / 1000.0f * sampleRate;
+        /*float delayInSamples = params.delayTime / 1000.0f * sampleRate;
+        delayLine.setDelay(delayInSamples);*/
+
+        float delayTime = params.tempoSync ? syncedTime : params.delayTime;
+        float delayInSamples = delayTime / 1000.0f * sampleRate;
         delayLine.setDelay(delayInSamples);
 
   //  lowCutFilter.setCutoffFrequency(params.lowCut);
@@ -367,3 +380,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new DelayAudioProcessor();
 }
+
