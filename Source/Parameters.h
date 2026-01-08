@@ -20,6 +20,7 @@ const juce::ParameterID lowCutParamID{ "lowCut", 1 };
 const juce::ParameterID highCutParamID{ "highCut", 1 };
 const juce::ParameterID tempoSyncParamID{"tempoSync", 1};
 const juce::ParameterID delayNoteParamID{ "delayNote", 1 };
+const juce::ParameterID bypassParamID{ "bypass", 1 };
 
 class Parameters{
     
@@ -51,7 +52,10 @@ class Parameters{
         int delayNote = 0;
         bool tempoSync = false;
 
+        bool bypassed = false;
+
         juce::AudioParameterBool* tempoSyncParam;
+        juce::AudioParameterBool* bypassParam;
             
         
         
