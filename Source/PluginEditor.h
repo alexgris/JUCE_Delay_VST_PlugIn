@@ -13,6 +13,7 @@
 #include "Parameters.h"
 #include "RotaryKnob.h"
 #include "LookAndFeel.h"
+#include "LevelMeter.h"
 
 
 
@@ -56,7 +57,13 @@ private:
     juce::TextButton tempoSyncButton;
     juce::AudioProcessorValueTreeState::ButtonAttachment tempoSyncAttachment{
         audioProcessor.apvts, tempoSyncParamID.getParamID(), tempoSyncButton
-    };   
+    };  
+    juce::ImageButton bypassButton;
+    juce::AudioProcessorValueTreeState::ButtonAttachment bypassAttachment{
+        audioProcessor.apvts, bypassParamID.getParamID(), bypassButton
+    };
+
+    LevelMeter meter;
     
     void updateDelayKnobs(bool tempoSyncActive);
 

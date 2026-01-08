@@ -16,6 +16,14 @@ namespace Colors {
     const juce::Colour background{ 245, 240, 235 };
     const juce::Colour header{ 40, 40, 40 };
 
+    namespace LevelMeter {
+        const juce::Colour background{ 245, 240, 235 };
+        const juce::Colour tickLine{ 200, 200, 200 };
+        const juce::Colour tickLabel{ 80, 80, 80 };
+        const juce::Colour tooLoud{ 226, 74, 81 };
+        const juce::Colour levelOK{ 65, 206, 88 };
+    }
+
     namespace Knob {
 
         const juce::Colour trackBackground{ 205, 200, 195 };

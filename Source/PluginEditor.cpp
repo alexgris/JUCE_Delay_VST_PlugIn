@@ -11,9 +11,11 @@
 
 //==============================================================================
 DelayAudioProcessorEditor::DelayAudioProcessorEditor (DelayAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p),
+    meter(p.levelL, p.levelR)
 {
    
+    outputGroup.addAndMakeVisible(meter);
 
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -53,6 +55,18 @@ DelayAudioProcessorEditor::DelayAudioProcessorEditor (DelayAudioProcessor& p)
    /* addAndMakeVisible(gainKnob);
     addAndMakeVisible(mixKnob);
     addAndMakeVisible(delayTimeKnob);*/
+
+    auto bypassIcon = juce::ImageCache::getFromMemory(BinaryData::Bypass_png, BinaryData::Bypass_pngSize);
+    bypassButton.setClickingTogglesState(true);
+    bypassButton.setBounds(0, 0, 20, 20);
+    bypassButton.setImages(
+        false, true, true,
+        bypassIcon, 1.0f, juce::Colours::white,
+        bypassIcon, 1.0f, juce::Colours::white,
+        bypassIcon, 1.0f, juce::Colours::grey,
+        0.0f);
+    addAndMakeVisible(bypassButton);
+
     setSize (500, 330);
 }
 
@@ -120,6 +134,8 @@ void DelayAudioProcessorEditor::resized()
 
     tempoSyncButton.setTopLeftPosition(20, delayTimeKnob.getBottom() + 10);
     delayNoteKnob.setTopLeftPosition(delayTimeKnob.getX(), delayTimeKnob.getY());
+    meter.setBounds(outputGroup.getWidth() - 45, 30, 30, gainKnob.getBottom() - 30);
+    bypassButton.setTopLeftPosition(bounds.getRight() - bypassButton.getWidth() - 10, 10);
 
     /*delayTimeKnob.setTopLeftPosition(20, 10);
     mixKnob.setTopLeftPosition(delayTimeKnob.getRight()+20, 10);
